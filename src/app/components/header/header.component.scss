@@ -1,0 +1,10 @@
+header {
+  @apply bg-blue-600 text-center flex justify-around;
+
+  a {
+    @apply text-white w-fit;
+    h1 {
+      @apply uppercase font-bold p-10 hover:bg-white hover:text-blue-600 w-fit;
+    }
+  }
+}

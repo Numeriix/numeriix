@@ -1,0 +1,13 @@
+#container {
+  position: relative;
+  min-height: 100vh;
+  > div {
+    padding-bottom: 6rem; /* Footer height */
+  }
+
+  app-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}

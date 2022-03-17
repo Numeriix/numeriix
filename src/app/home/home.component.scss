@@ -1,0 +1,25 @@
+main {
+  @apply p-10 w-full bg-gray-100 flex justify-around;
+  > div {
+    @apply w-fit rounded-lg overflow-hidden shadow hover:shadow-2xl flex transition-shadow;
+    > a {
+      @apply w-fit;
+      > div {
+        @apply w-fit flex;
+        img {
+          @apply w-60;
+        }
+
+        > div {
+          @apply bg-gray-50 p-4;
+          h1 {
+            @apply text-5xl text-gray-800 font-bold;
+          }
+          p {
+            @apply text-gray-500;
+          }
+        }
+      }
+    }
+  }
+}
