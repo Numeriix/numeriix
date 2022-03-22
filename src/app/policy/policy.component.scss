@@ -1,0 +1,30 @@
+main {
+  @apply p-8 bg-gray-100;
+  div {
+    @apply max-w-screen-lg container;
+    h1 {
+      @apply text-3xl font-semibold my-4 text-gray-900;
+    }
+
+    h3 {
+      @apply text-xl font-semibold text-gray-900;
+    }
+
+    h5 {
+      @apply text-base text-gray-500;
+    }
+
+    p {
+      @apply my-4 text-gray-700;
+      span {
+        @apply font-bold;
+      }
+    }
+
+    ul {
+      @apply mb-8 ml-10 text-gray-700;
+      li {
+      }
+    }
+  }
+}
