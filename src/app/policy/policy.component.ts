@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./policy.component.scss'],
 })
 export class PolicyComponent implements OnInit {
-  lastPolicyUpdateDate = new Date(2022, 3, 18);
+  lastPolicyUpdateDate = new Date(2022, 2, 18);
   numeriixEmail = 'numeriix@gmail.com';
 
   constructor() {}
