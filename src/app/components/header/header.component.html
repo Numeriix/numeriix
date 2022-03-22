@@ -1,7 +1,18 @@
 <header>
   <nav>
-    <a routerLink="/">
-      <h1>Numeriix</h1>
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <h1>Home</h1>
+    </a>
+    <a
+      routerLink="policy"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <h1>Policy</h1>
     </a>
   </nav>
 </header>
