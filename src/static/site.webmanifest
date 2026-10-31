@@ -1,0 +1,14 @@
+{
+  "name": "Numeriix",
+  "short_name": "Numeriix",
+  "description": "Apps built for everyday life in Congo.",
+  "lang": "en",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#9400BD",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

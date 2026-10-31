@@ -10,6 +10,7 @@ Netlify on every push to `release` (see `netlify.toml`).
    - required: `slug`, `name`, `tagline`, `summary`, `highlights` (list), `website`, `privacy`,
      `gradient` (two `#rrggbb` colors), `logo`
    - optional: `status` (for example "Launching soon on Android"), `googlePlay`, `appStore`,
+     `shareImage` (a 1200x630 JPEG in `src/static`, shown when the app page is shared),
      `logoTilt` (degrees)
 3. `node build.mjs`, then preview with `python3 -m http.server -d dist 8000`.
 

@@ -13,8 +13,12 @@
     "status": "Launching soon on Android",
     "website": "https://bolilove.com",
     "privacy": "https://bolilove.com/privacy",
-    "gradient": ["#9400BD", "#E73C7D"],
+    "gradient": [
+      "#9400BD",
+      "#E73C7D"
+    ],
     "logo": "logos/boli.svg",
-    "logoTilt": -15
+    "logoTilt": -15,
+    "shareImage": "og/boli.jpg"
   }
 ]

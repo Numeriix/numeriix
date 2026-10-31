@@ -7,6 +7,8 @@ const SRC = "src";
 const OUT = "dist";
 const YEAR = new Date().getFullYear();
 const CONTACT = "support@bolilove.com";
+const ORIGIN = "https://www.numeriix.com";
+const SHARE = { path: "/og.jpg", alt: "Numeriix: apps built for everyday life in Congo." };
 
 const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -26,6 +28,8 @@ function loadApps() {
     }
     if (!app.gradient.every((c) => /^#[0-9a-fA-F]{6}$/.test(c))) throw new Error(`apps.json: ${app.slug}.gradient must be two #rrggbb colors`);
     if (!existsSync(join(SRC, app.logo))) throw new Error(`apps.json: ${app.slug} logo ${app.logo} not found`);
+    if (app.shareImage && !existsSync(join(SRC, "static", app.shareImage)))
+      throw new Error(`apps.json: ${app.slug} shareImage static/${app.shareImage} not found`);
   }
   return apps;
 }
@@ -38,7 +42,13 @@ function logo(app) {
   return svg.replace("<svg", `<svg aria-hidden="true"${tilt}`);
 }
 
-function page({ title, description, path, body }) {
+const jsonLd = (data) => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
+
+const ORGANIZATION = { "@type": "Organization", name: "Numeriix", url: `${ORIGIN}/`, logo: `${ORIGIN}/icon-512.png`, email: CONTACT };
+
+/** Share images are 1200x630 JPEGs in src/static (the site default, or an app's shareImage). */
+function page({ title, description, path, body, image = SHARE.path, imageAlt = SHARE.alt, noindex = false, ld }) {
+  const url = `${ORIGIN}${path}`;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,12 +56,27 @@ function page({ title, description, path, body }) {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
+${noindex ? '<meta name="robots" content="noindex">\n' : ""}<link rel="canonical" href="${url}">
+<meta property="og:site_name" content="Numeriix">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.numeriix.com${path}">
+<meta property="og:url" content="${url}">
+<meta property="og:image" content="${ORIGIN}${image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(imageAlt)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(description)}">
+<meta name="twitter:image" content="${ORIGIN}${image}">
+<meta name="theme-color" content="#9400BD">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/styles.css">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+${ld ? `${jsonLd({ "@context": "https://schema.org", ...ld })}\n` : ""}<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <header class="wrap top"><a class="name" href="/">Numeriix</a><nav><a href="/#apps">Apps</a><a href="/#contact">Contact</a><a href="/policy/">Privacy</a></nav></header>
@@ -81,6 +106,7 @@ function home(apps) {
     title: "Numeriix",
     description: `Numeriix builds apps for everyday life in the Democratic Republic of Congo: ${names}.`,
     path: "/",
+    ld: ORGANIZATION,
     body: `<main>
 <section class="wrap hero">
 <h1>Apps built for everyday life in Congo.</h1>
@@ -110,6 +136,16 @@ function appPage(app) {
     title: `${app.name}: ${app.tagline} | Numeriix`,
     description: app.summary,
     path: `/apps/${app.slug}/`,
+    image: app.shareImage ? `/${app.shareImage}` : SHARE.path,
+    imageAlt: `${app.name}: ${app.tagline}`,
+    ld: {
+      "@type": "MobileApplication",
+      name: app.name,
+      description: app.summary,
+      url: app.website,
+      operatingSystem: "ANDROID",
+      publisher: ORGANIZATION,
+    },
     body: `<main>
 <section class="wrap"><div class="banner" style="${gradient(app)}">${logo(app)}<div><h1>${esc(app.name)}</h1><p>${esc(app.tagline)}</p></div></div></section>
 <section class="wrap doc">
@@ -146,6 +182,7 @@ function notFound() {
     title: "Page not found | Numeriix",
     description: "Numeriix",
     path: "/404",
+    noindex: true,
     body: `<main class="wrap doc"><h1>Page not found</h1><p>This page does not exist. <a href="/">Go to the home page</a> to see our apps.</p></main>`,
   });
 }
@@ -163,4 +200,11 @@ write("index.html", home(apps));
 write("policy/index.html", policy(apps));
 write("404.html", notFound());
 for (const app of apps) write(`apps/${app.slug}/index.html`, appPage(app));
+const paths = ["/", "/policy/", ...apps.map((a) => `/apps/${a.slug}/`)];
+write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${paths.map((p) => `  <url><loc>${ORIGIN}${p}</loc></url>`).join("\n")}
+</urlset>
+`);
+write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${ORIGIN}/sitemap.xml\n`);
 console.log(`Built ${apps.length} app page(s) into ${OUT}/`);
