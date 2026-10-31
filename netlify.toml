@@ -1,4 +1,7 @@
-# Static site: no build step. Netlify serves site/ as is.
+# numeriix.com: `node build.mjs` renders src/ into dist/ (no dependencies).
 [build]
-  publish = "site"
-  command = "echo static site, no build"
+  publish = "dist"
+  command = "node build.mjs"
+
+[build.environment]
+  NODE_VERSION = "22"

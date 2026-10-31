@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "boli",
+    "name": "Boli",
+    "tagline": "Serious dating in DR Congo",
+    "summary": "Boli helps people in the Democratic Republic of Congo meet someone for a real relationship, safely, on any phone and any network.",
+    "highlights": [
+      "Verified profiles: a selfie is checked against the profile photos.",
+      "Voice intros, so you hear someone before you like them.",
+      "Light on data, built for 2G and prepaid plans.",
+      "In French, Lingala and Swahili."
+    ],
+    "status": "Launching soon on Android",
+    "website": "https://bolilove.com",
+    "privacy": "https://bolilove.com/privacy",
+    "gradient": ["#9400BD", "#E73C7D"],
+    "logo": "logos/boli.svg",
+    "logoTilt": -15
+  }
+]

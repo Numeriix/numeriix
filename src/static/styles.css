@@ -1,0 +1,49 @@
+:root{--ink:#1B0B24;--ink2:#5F6368;--bg:#fff;--paper:#F7F2F8;--plum:#9400BD;--rose:#E73C7D;--rule:#E9E1EC}
+@media (prefers-color-scheme:dark){:root{--ink:#F4EEF6;--ink2:#BDBDBD;--bg:#120A17;--paper:#1E1324;--rule:#2E2236}}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:inherit;text-decoration-color:var(--rose);text-underline-offset:3px}
+a:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.top{display:flex;justify-content:space-between;align-items:center;padding-top:28px;padding-bottom:28px}
+.name{font-weight:900;font-size:22px;letter-spacing:-.03em;text-decoration:none}
+.top nav{display:flex;gap:24px;font-size:15px}
+.hero{padding-top:56px;padding-bottom:88px}
+.hero h1{font-size:clamp(40px,7.5vw,84px);line-height:1;letter-spacing:-.035em;font-weight:900;max-width:13ch;margin:0 0 28px}
+.hero p{font-size:20px;color:var(--ink2);max-width:40ch;margin:0}
+.section{font-size:30px;letter-spacing:-.02em;margin:0 0 24px}
+.apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-bottom:88px}
+.tile{display:flex;flex-direction:column;background:var(--paper);border-radius:28px;overflow:hidden;text-decoration:none;color:inherit}
+.tile:hover .more{text-decoration:underline}
+.art{position:relative;display:flex;align-items:center;justify-content:center;min-height:220px;color:#fff;overflow:hidden}
+.art svg{width:120px;height:164px}
+.about{padding:28px 28px 32px}
+.about h3{font-size:30px;letter-spacing:-.02em;margin:0 0 2px}
+.about p{margin:0 0 12px;color:var(--ink2)}
+.about .tag{color:var(--rose);font-weight:700}
+.status{display:inline-block;font-size:14px;font-weight:600;color:var(--ink);background:var(--bg);border:1px solid var(--rule);border-radius:999px;padding:4px 12px}
+.more{display:block;margin-top:8px;font-weight:700;color:var(--ink)}
+.apps.one{grid-template-columns:1fr}
+.apps.one .tile{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr)}
+.apps.one .art{min-height:340px}
+.apps.one .art svg{width:200px;height:272px}
+.apps.one .about{padding:44px}
+.banner{display:flex;align-items:center;gap:32px;color:#fff;border-radius:28px;padding:40px;margin-top:16px}
+.banner svg{flex:none;width:96px;height:131px}
+.banner h1{font-size:clamp(40px,6vw,64px);letter-spacing:-.03em;line-height:1;margin:0 0 8px}
+.banner p{margin:0;font-size:20px;font-weight:600}
+.lead{font-size:20px;color:var(--ink)!important}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0}
+.btn{display:inline-block;padding:14px 26px;border-radius:999px;background:linear-gradient(110deg,#E73C7D,#9400BD 76%);color:#fff;font-weight:700;text-decoration:none}
+.btn.ghost{background:none;color:var(--ink);border:2px solid var(--rule)}
+.contact{border-top:1px solid var(--rule);padding-top:40px;padding-bottom:72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
+.contact h2{font-size:24px;margin:0 0 8px;letter-spacing:-.01em}
+.contact p{margin:0;color:var(--ink2)}
+.contact a{color:var(--ink)}
+.foot{color:var(--ink2);font-size:14px;padding-top:24px;padding-bottom:40px;border-top:1px solid var(--rule)}
+.doc{max-width:680px;padding-bottom:72px}
+.doc h1{font-size:44px;letter-spacing:-.03em;line-height:1.05;margin:40px 0 16px}
+.doc h2{font-size:22px;margin:36px 0 8px}
+.doc p,.doc li{color:var(--ink2)}
+.doc strong{color:var(--ink)}
+@media (max-width:720px){.apps.one .tile{grid-template-columns:1fr}.apps.one .art{min-height:240px}.apps.one .art svg{width:140px;height:190px}.apps.one .about{padding:28px 24px 32px}.banner{flex-direction:column;align-items:flex-start;gap:20px;padding:28px}.hero{padding-top:24px;padding-bottom:56px}}
