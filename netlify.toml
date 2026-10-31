@@ -1,4 +1,4 @@
 # Static site: no build step. Netlify serves site/ as is.
 [build]
   publish = "site"
-  command = ""
+  command = "echo static site, no build"
